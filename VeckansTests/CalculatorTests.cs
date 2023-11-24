@@ -25,7 +25,7 @@ public class CalculatorTests
     }
 
     [TestMethod()]
-    public void AddTest()
+    public void AddTestNegative()
     {
         // Arrange
         var expected = -5;
