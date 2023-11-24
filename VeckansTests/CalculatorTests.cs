@@ -23,4 +23,17 @@ public class CalculatorTests
         // Assert
         Assert.AreEqual(expected, actual);
     }
+
+    [TestMethod()]
+    public void AddTest()
+    {
+        // Arrange
+        var expected = -5;
+
+        // Act
+        var actual = Calculator.Add(-3, -2);
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 }
