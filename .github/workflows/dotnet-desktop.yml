@@ -3,22 +3,19 @@ name: .NET Core Dos
 on:
   push:
     branches: [ "main", "master", "test" ]
-  pull_request:
-    branches: [ "main", "master", "test"  ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # For a list of available runner types, refer to
-                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-latest
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        #fetch-depth: 1 # hämta bara senaste
-        fetch-depth: 0 # hämta information om alla commits
-        
+        fetch-depth: 0 # Fetch information about all commits
+
     # Install the .NET Core workload
-    - name: Install .NET Core,
+    - name: Install .NET Core
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
@@ -27,5 +24,19 @@ jobs:
     - name: Execute unit tests
       run: dotnet test
 
-    - name: Git log
-      run : git log
+    - name: Check if push is triggered by script
+      run: |
+        if [[ "${{ github.actor }}" == "github-actions[bot]" ]]; then
+          echo "Push is triggered by the script. Skipping..."
+          exit 0
+        fi
+
+    - name: Generate human-readable Git log
+      run: |
+        git log --pretty=format:"[%s] (%h) %an - %s" > History.md
+
+    - name: Add and commit History.md
+      run: |
+        git add History.md
+        git commit -m "Update History.md"
+        git push
