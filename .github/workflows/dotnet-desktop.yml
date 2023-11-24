@@ -14,8 +14,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        fetch-depth: 1 # hämta bara senaste
-
+        #fetch-depth: 1 # hämta bara senaste
+        fetch-depth: 0 # hämta information om alla commits
+        
     # Install the .NET Core workload
     - name: Install .NET Core,
       uses: actions/setup-dotnet@v3
