@@ -41,10 +41,9 @@ jobs:
       run: |
         git log --pretty=format:"[%s] (%h) %an - %s" > History.md
 
-    # Generate the HTML code coverage report using ReportGenerator and print it
-    - name: Generate and print coverage report
+    # Generate the HTML code coverage report using ReportGenerator and save it
+    - name: Generate and save coverage report
       run: |
         dotnet tool install -g dotnet-reportgenerator-globaltool
         reportgenerator -reports:coverage.opencover.xml -targetdir:coverage-report
-        cat coverage-report/index.htm
-      working-directory: ${{ github.workspace }}
+      working-directory: ${{ github.workspace }}/path/to/coverage-folder
