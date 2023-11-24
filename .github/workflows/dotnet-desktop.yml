@@ -46,4 +46,4 @@ jobs:
       run: |
         dotnet tool install -g dotnet-reportgenerator-globaltool
         reportgenerator -reports:coverage.opencover.xml -targetdir:coverage-report
-      working-directory: ${{ github.workspace }}/path/to/coverage-folder
+      working-directory: ${{ github.workspace }}/coverage-report
