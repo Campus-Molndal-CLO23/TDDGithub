@@ -14,6 +14,13 @@ public class CalculatorTests
     [TestMethod()]
     public void AddTest()
     {
-        Assert.Fail();
+        // Arrange
+        var expected = 5;
+
+        // Act
+        var actual = Calculator.Add(3, 2);
+
+        // Assert
+        Assert.AreEqual(expected, actual);
     }
 }
